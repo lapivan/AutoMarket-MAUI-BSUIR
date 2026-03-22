@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoMarket.Domain.Entities
+﻿namespace AutoMarket.Domain.Entities
 {
     public class CarBrand : Entity
     {
@@ -17,9 +13,12 @@ namespace AutoMarket.Domain.Entities
         }
         public CarBrand(string name, string countryOfOrigin, int yearFounded)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name cannot be empty", nameof(name));
-            if (string.IsNullOrWhiteSpace(countryOfOrigin)) throw new ArgumentException("Country of origin cannot be empty", nameof(countryOfOrigin));
-            if (yearFounded <= 1885 || yearFounded > DateTime.UtcNow.Year) throw new ArgumentOutOfRangeException(nameof(yearFounded), "Year founded is invalid");
+            if (string.IsNullOrWhiteSpace(name)) 
+                throw new ArgumentException("Name cannot be empty", nameof(name));
+            if (string.IsNullOrWhiteSpace(countryOfOrigin)) 
+                throw new ArgumentException("Country of origin cannot be empty", nameof(countryOfOrigin));
+            if (yearFounded <= 1885 || yearFounded > DateTime.UtcNow.Year) 
+                throw new ArgumentOutOfRangeException(nameof(yearFounded), "Year founded is invalid");
 
             Name = name;
             CountryOfOrigin = countryOfOrigin;
@@ -28,13 +27,15 @@ namespace AutoMarket.Domain.Entities
 
         public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name cannot be empty", nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) 
+                throw new ArgumentException("Name cannot be empty", nameof(name));
             Name = name;
         }
 
         public void ChangeCountryOfOrigin(string countryOfOrigin)
         {
-            if (string.IsNullOrWhiteSpace(countryOfOrigin)) throw new ArgumentException("Country of origin cannot be empty", nameof(countryOfOrigin));
+            if (string.IsNullOrWhiteSpace(countryOfOrigin)) 
+                throw new ArgumentException("Country of origin cannot be empty", nameof(countryOfOrigin));
             CountryOfOrigin = countryOfOrigin;
         }
 

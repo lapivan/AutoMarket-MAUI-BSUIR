@@ -1,7 +1,4 @@
 ﻿using AutoMarket.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AutoMarket.Domain.Abstractions
 {

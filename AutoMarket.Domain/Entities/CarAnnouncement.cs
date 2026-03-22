@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMarket.Domain.Enums;
+﻿using AutoMarket.Domain.Enums;
 
 namespace AutoMarket.Domain.Entities
 {

@@ -1,8 +1,5 @@
 ﻿using AutoMarket.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace AutoMarket.Domain.Abstractions
 {
