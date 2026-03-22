@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="AutoMarket.Application/AutoMarket.Application.csproj" />
+  <Project Path="AutoMarket.Domain/AutoMarket.Domain.csproj" />
+  <Project Path="AutoMarket.Persistense/AutoMarket.Persistense.csproj" />
+  <Project Path="AutoMarket.UI/AutoMarket.UI.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
