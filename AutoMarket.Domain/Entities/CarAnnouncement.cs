@@ -12,97 +12,92 @@ namespace AutoMarket.Domain.Entities
         public decimal Price { get; private set; }
         public string Description { get; private set; } = String.Empty;
         public int ManufactureYear { get; private set; }
-        public DateTime CreatedAt { get; private set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; private set; } = DateTime.Now;
-        public int CarBrandId { get; private set; } = 0;
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
+        public int? CarBrandId { get; private set; } = 0;
+        public CarBrand? CarBrand { get; private set; }
         public AnnouncementStatus Status { get; private set; } = AnnouncementStatus.Active;
 
-        public CarAnnouncement(string title, string model, decimal price, string description, int manufactureYear)
+        public CarAnnouncement(string title, string model, decimal price, string description,
+                       int manufactureYear, int carBrandId)
         {
+            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title required");
+            if (string.IsNullOrWhiteSpace(model)) throw new ArgumentException("Model required");
+            if (price <= 0) throw new ArgumentException("Price must be positive");
+            if (manufactureYear < 1886 || manufactureYear > DateTime.UtcNow.Year + 1)
+                throw new ArgumentOutOfRangeException(nameof(manufactureYear));
+
             Title = title;
             Model = model;
             Price = price;
-            Description = description;
+            Description = description ?? "";
             ManufactureYear = manufactureYear;
+            CarBrandId = carBrandId;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = CreatedAt;
+            Status = AnnouncementStatus.Active;
         }
         private CarAnnouncement() { }
 
         public void ChangeTitle(string title)
         {
-            if (string.IsNullOrWhiteSpace(title))
-            {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title cannot be empty", nameof(title));
             Title = title;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void ChangeModel(string model)
         {
-            if (string.IsNullOrWhiteSpace(model))
-            {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(model)) throw new ArgumentException("Model cannot be empty", nameof(model));
             Model = model;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void ChangePrice(decimal price)
         {
-            if (price <= 0)
-            {
-                return;
-            }
+            if (price <= 0) throw new ArgumentException("Price must be positive", nameof(price));
             Price = price;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void ChangeDescription(string description)
         {
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(description)) throw new ArgumentException("Description cannot be empty", nameof(description));
             Description = description;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void ChangeManufactureYear(int manufactureYear)
         {
-            if (manufactureYear <= 1885 || manufactureYear > DateTime.Now.Year + 1)
-            {
-                return;
-            }
+            if (manufactureYear <= 1885 || manufactureYear > DateTime.UtcNow.Year + 1)
+                throw new ArgumentOutOfRangeException(nameof(manufactureYear), "Manufacture year is invalid");
             ManufactureYear = manufactureYear;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
-        public void ChangeCarBrandId(int carBrandId)
+        protected internal void AssignToBrand(CarBrand? brand)
         {
-            if (carBrandId <= 0)
-            {
-                return;
-            }
-            CarBrandId = carBrandId;
-            UpdatedAt = DateTime.Now;
+            CarBrand = brand;
+            CarBrandId = brand?.Id;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void MarkAsSold()
         {
             Status = AnnouncementStatus.Sold;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void Archive()
         {
             Status = AnnouncementStatus.Archived;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void Activate()
         {
             Status = AnnouncementStatus.Active;
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }
