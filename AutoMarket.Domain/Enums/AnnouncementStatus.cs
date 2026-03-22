@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoMarket.Domain.Enums
+﻿namespace AutoMarket.Domain.Enums
 {
     public enum AnnouncementStatus
     {
