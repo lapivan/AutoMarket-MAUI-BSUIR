@@ -2,7 +2,7 @@
 
 namespace AutoMarket.UI
 {
-    public partial class App : Application
+    public partial class App : Microsoft.Maui.Controls.Application
     {
         public App()
         {
