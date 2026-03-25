@@ -152,6 +152,13 @@ coverage*.info
 *.coverage
 *.coveragexml
 
+############################################
+# App settings
+############################################
+appsettings.json
+appsettings.*.json
+
+
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
