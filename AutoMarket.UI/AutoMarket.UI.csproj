@@ -75,7 +75,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\AutoMarket.Application\AutoMarket.Application.csproj" />
 	  <ProjectReference Include="..\AutoMarket.Domain\AutoMarket.Domain.csproj" />
-	  <ProjectReference Include="..\AutoMarket.Persistense\AutoMarket.Persistense.csproj" />
+	  <ProjectReference Include="..\AutoMarket.Persistence\AutoMarket.Persistenсe.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

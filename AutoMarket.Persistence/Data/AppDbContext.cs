@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace AutoMarket.Persistense.Data
+namespace AutoMarket.Persistence.Data
 {
     public class AppDbContext : DbContext
     {

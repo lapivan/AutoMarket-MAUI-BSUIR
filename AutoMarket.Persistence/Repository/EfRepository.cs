@@ -1,9 +1,9 @@
-﻿using AutoMarket.Persistense.Data;
+﻿using AutoMarket.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using static System.Net.WebRequestMethods;
 
-namespace AutoMarket.Persistense.Repository
+namespace AutoMarket.Persistence.Repository
 {
     public class EfRepository<T> : IRepository<T> where T : Entity
     {

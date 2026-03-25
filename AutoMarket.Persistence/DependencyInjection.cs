@@ -1,9 +1,9 @@
-﻿using AutoMarket.Persistense.Data;
-using AutoMarket.Persistense.Repository;
+﻿using AutoMarket.Persistence.Data;
+using AutoMarket.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AutoMarket.Persistense
+namespace AutoMarket.Persistence
 {
     public static class DependencyInjection
     {

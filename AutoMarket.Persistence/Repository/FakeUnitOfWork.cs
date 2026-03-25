@@ -1,4 +1,4 @@
-﻿namespace AutoMarket.Persistense.Repository
+﻿namespace AutoMarket.Persistence.Repository
 {
     public class FakeUnitOfWork : IUnitOfWork
     {

@@ -1,6 +1,6 @@
-﻿using AutoMarket.Persistense.Data;
+﻿using AutoMarket.Persistence.Data;
 
-namespace AutoMarket.Persistense.Repository
+namespace AutoMarket.Persistence.Repository
 {
     public class EfUnitOfWork : IUnitOfWork
     {

@@ -1,4 +1,4 @@
-﻿using AutoMarket.Persistense;
+﻿using AutoMarket.Persistence;
 using AutoMarket.Application;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
@@ -19,8 +19,8 @@ namespace AutoMarket.UI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services
-                .AddApplication()
-                .AddPersistense();
+                .AddApplication();
+                //.AddPersistence();
 
 #if DEBUG
             builder.Logging.AddDebug();

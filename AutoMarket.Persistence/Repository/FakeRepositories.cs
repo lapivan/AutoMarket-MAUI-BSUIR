@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace AutoMarket.Persistense.Repository
+namespace AutoMarket.Persistence.Repository
 {
     public class FakeBrandRepository : IRepository<CarBrand>
     {
