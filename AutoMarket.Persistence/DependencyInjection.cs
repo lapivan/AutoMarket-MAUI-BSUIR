@@ -13,10 +13,15 @@ namespace AutoMarket.Persistence
             return services;
         }
 
-        public static IServiceCollection AddPersistence(this IServiceCollection services, DbContextOptions<AppDbContext> options)
+
+        public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
-            services.AddSingleton<IUnitOfWork, EfUnitOfWork>();
-            services.AddSingleton(new AppDbContext(options));
+            services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
+            return services;
+        }
+        public static IServiceCollection AddPersistence(this IServiceCollection services, DbContextOptions options)
+        {
+            services.AddPersistence().AddSingleton<AppDbContext>(new AppDbContext((DbContextOptions<AppDbContext>)options));
             return services;
         }
     }
