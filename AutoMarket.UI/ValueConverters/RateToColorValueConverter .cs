@@ -11,7 +11,7 @@ namespace AutoMarket.UI.ValueConverters
                               CultureInfo culture)
         {
 
-            if ((decimal)value < 60000)
+            if ((decimal)value < 100000)
                 return Colors.LightPink;
             return Colors.WhiteSmoke;     
         }

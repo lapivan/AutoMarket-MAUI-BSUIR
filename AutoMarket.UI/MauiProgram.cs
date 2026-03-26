@@ -13,29 +13,38 @@ namespace AutoMarket.UI
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()
-                .ConfigureFonts(fonts =>
+            builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "automarket.db");
+            string connectionString = $"Data Source={dbPath}";
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(connectionString));
+
+            builder.Services.AddApplication();
+            builder.Services.AddPersistence(new DbContextOptionsBuilder<AppDbContext>().UseSqlite(connectionString).Options);
+            builder.Services.RegisterPages();
+            builder.Services.RegisterViewModels();
+
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                //context.Database.EnsureCreated();
+
+                try
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlite(connectionString);
-            builder.Services
-                .AddApplication()
-                //.AddPersistence(optionsBuilder.Options)
-                .AddFakePersistence()
-                .RegisterPages()
-                .RegisterViewModels();
+                    DbInitializer.Initialize(scope.ServiceProvider).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Ошибка при наполнении данными: {ex.Message}");
+                }
+            }
 
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
-
-            return builder.Build();
+            return app;
         }
     }
 }
