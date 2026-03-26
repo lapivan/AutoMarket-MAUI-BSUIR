@@ -1,7 +1,8 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using AutoMarket.Application.CarBrandUseCases.Queries;
-using System.Collections.ObjectModel;
+using AutoMarket.UI.Pages;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace AutoMarket.UI.ViewModels;
 
@@ -26,6 +27,17 @@ public partial class CarBrandsViewModel : ObservableObject
     public async Task UpdateGroupList() => await GetBrands();
     [RelayCommand]
     public async Task UpdateMembersList() => await GetAnnouncements();
+    [RelayCommand]
+    async void ShowDetails(AnnouncementDto announcement) => await GotoDetailsPage(announcement);
+    private async Task GotoDetailsPage(AnnouncementDto announcement)
+    {
+        IDictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            { "Announcement", announcement }
+        };
+        await Shell.Current.GoToAsync(nameof(AnnouncementDetails), parameters);
+    }
+
     private async Task GetBrands()
     {
         var brands = await _mediator.Send(new GetCarBrandListQuery());

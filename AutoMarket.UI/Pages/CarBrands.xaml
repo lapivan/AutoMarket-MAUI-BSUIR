@@ -5,7 +5,8 @@
              xmlns:converters="clr-namespace:AutoMarket.UI.ValueConverters"
              x:Class="AutoMarket.UI.Pages.CarBrands"
              x:Name="CarBrandsPage"
-             Title="CarBrands"
+             Title="Car brands"
+             BackgroundColor="White"
              xmlns:models="clr-namespace:AutoMarket.UI.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
              x:DataType="models:CarBrandsViewModel">
@@ -22,23 +23,32 @@
     </ContentPage.Behaviors>
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Padding="20,10" Spacing="10">
+
             <Picker x:Name="CarBrandPicker" 
-                    Title="Car brand"
+                    Title="Choose brand"
+                    TextColor="Black"
+                    FontSize="18"
+                    FontAttributes="Bold"
                     ItemsSource="{Binding CarBrands}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedBrand}"
-                    SelectedIndexChanged="PickerSelectedIndexChanged">
+                    BackgroundColor="#EDEDED">
                 <Picker.Behaviors>
                     <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
                                                     Command="{Binding UpdateMembersListCommand}"/>
                 </Picker.Behaviors>
             </Picker>
 
-            <Editor IsReadOnly="True"
-                    Text="{Binding SelectedBrandInfo}"
-                    HeightRequest="70">
-            </Editor>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="0,0,0,5"/>
+
+            <Label Text="{Binding SelectedBrandInfo}" 
+                   FontSize="14" 
+                   TextColor="#424242"
+                   Padding="5,0"
+                   LineBreakMode="WordWrap"/>
+
+            <BoxView HeightRequest="1" Color="#F5F5F5" Margin="0,10"/>
 
             <CollectionView ItemsSource="{Binding Announcements}">
                 <CollectionView.ItemTemplate>
@@ -46,9 +56,14 @@
                         <Border Stroke="#E0E0E0"
                                 StrokeThickness="1"
                                 Padding="10"
-                                Margin="10,5"
+                                Margin="0,5"
                                 BackgroundColor="{Binding Price, Converter={StaticResource PriceToColorConverter}}">
                             <VerticalStackLayout Spacing="5">
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference CarBrandsPage}, 
+                                        Path=BindingContext.ShowDetailsCommand}" 
+                                        CommandParameter="{Binding}"/>
+                                </VerticalStackLayout.GestureRecognizers>
                                 <Label Text="{Binding Title}" 
                                        FontSize="16" 
                                        FontAttributes="Bold"
@@ -68,6 +83,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
