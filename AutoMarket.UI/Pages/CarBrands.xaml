@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:persistence="clr-namespace:AutoMarket.Application.CarBrandUseCases.Queries;assembly=AutoMarket.Application"
              x:Class="AutoMarket.UI.Pages.CarBrands"
              x:Name="CarBrandsPage"
              Title="CarBrands"
@@ -18,8 +19,29 @@
                 Title = "Car brand"
                 ItemsSource="{Binding CarBrands}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedBrand}">
+                SelectedItem="{Binding SelectedBrand}"
+                SelectedIndexChanged="PickerSelectedIndexChanged">
+            <Picker.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                Command="{Binding UpdateMembersListCommand}"/>
+            </Picker.Behaviors>
         </Picker>
+        <Editor IsReadOnly="True"
+                Text="{Binding SelectedBrandInfo}"
+                HeightRequest="70">
+        </Editor>
+        <CollectionView ItemsSource="{Binding Announcements}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="persistence:AnnouncementDto">
+                    <StackLayout Padding="8">
+                        <Label Text="{Binding Title}" FontSize="18" TextColor="#006064" />
+                        <Label Text="{Binding Model}"/>
+                        <Label Text="{Binding Price, StringFormat='{0:C}'}"/>
+                        <Label Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy}'}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 
     

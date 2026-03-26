@@ -9,8 +9,22 @@
         {
             _brandRepository = new FakeBrandRepository();
             _announcementRepository = new FakeAnnouncementRepository();
+            SyncData();
         }
+        private void SyncData()
+        {
+            var brands = _brandRepository.ListAllAsync().Result;
+            var announcements = _announcementRepository.ListAllAsync().Result;
 
+            foreach (var ann in announcements)
+            {
+                var brand = brands.FirstOrDefault(b => b.Id == ann.CarBrandId);
+                if (brand != null)
+                {
+                    brand.AddAnnouncement(ann);
+                }
+            }
+        }
         public IRepository<CarBrand> BrandRepository => _brandRepository;
 
         public IRepository<CarAnnouncement> AnnouncementRepository => _announcementRepository;

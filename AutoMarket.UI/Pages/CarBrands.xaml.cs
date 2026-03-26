@@ -11,9 +11,10 @@ public partial class CarBrands : ContentPage
         _carBrandsViewModel = carBrandsViewModel;
         BindingContext = _carBrandsViewModel;
     }
-    private void PickerSelectedIndexChanged(object sender, EventArgs e)
+    private async void PickerSelectedIndexChanged(object sender, EventArgs e)
     {
-
+        if (BindingContext is CarBrandsViewModel vm)
+            await vm.UpdateMembersListCommand.ExecuteAsync(null);
     }
     protected override async void OnAppearing()
     {

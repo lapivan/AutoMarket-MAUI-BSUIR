@@ -11,17 +11,22 @@ public partial class CarBrandsViewModel : ObservableObject
     public ObservableCollection<BrandListDto> CarBrands { get; set; } = new();
     public ObservableCollection<AnnouncementDto> Announcements { get; set; } = new();
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SelectedBrandInfo))]
     private BrandListDto _selectedBrand;
     public CarBrandsViewModel(IMediator mediator)
     {
         _mediator = mediator;
     }
+    public string SelectedBrandInfo => SelectedBrand == null
+        ? string.Empty
+        : $"Brand: {SelectedBrand.Name ?? "Unknown"}\n" +
+          $"Country: {SelectedBrand.CountryOfOrigin ?? "Unknown"}\n" +
+          $"Year of foundation: {SelectedBrand.YearFounded}";
     [RelayCommand]
     public async Task UpdateGroupList() => await GetBrands();
     [RelayCommand]
     public async Task UpdateMembersList() => await GetAnnouncements();
-
-    public async Task GetBrands()
+    private async Task GetBrands()
     {
         var brands = await _mediator.Send(new GetCarBrandListQuery());
         if (brands != null)
@@ -34,7 +39,7 @@ public partial class CarBrandsViewModel : ObservableObject
             });
         }
     }
-    public async Task GetAnnouncements()
+    private async Task GetAnnouncements()
     {
         if (SelectedBrand == null) return;
 
@@ -49,5 +54,10 @@ public partial class CarBrandsViewModel : ObservableObject
                     Announcements.Add(announcement);
             });
         }
+    }
+    partial void OnSelectedBrandChanged(BrandListDto value)
+    {
+        if (value != null)
+            _ = UpdateMembersListCommand.ExecuteAsync(null);
     }
 }
