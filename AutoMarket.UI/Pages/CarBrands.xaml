@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:persistence="clr-namespace:AutoMarket.Application.CarBrandUseCases.Queries;assembly=AutoMarket.Application"
+             xmlns:converters="clr-namespace:AutoMarket.UI.ValueConverters"
              x:Class="AutoMarket.UI.Pages.CarBrands"
              x:Name="CarBrandsPage"
              Title="CarBrands"
@@ -9,40 +10,64 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
              x:DataType="models:CarBrandsViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PriceToColorConverter x:Key="PriceToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Loaded" 
                                         Command="{Binding UpdateGroupListCommand}"/>
     </ContentPage.Behaviors>
 
-    <VerticalStackLayout>
-        <Picker x:Name="CarBrandPicker" 
-                Title = "Car brand"
-                ItemsSource="{Binding CarBrands}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedBrand}"
-                SelectedIndexChanged="PickerSelectedIndexChanged">
-            <Picker.Behaviors>
-                <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
-                                                Command="{Binding UpdateMembersListCommand}"/>
-            </Picker.Behaviors>
-        </Picker>
-        <Editor IsReadOnly="True"
-                Text="{Binding SelectedBrandInfo}"
-                HeightRequest="70">
-        </Editor>
-        <CollectionView ItemsSource="{Binding Announcements}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="persistence:AnnouncementDto">
-                    <StackLayout Padding="8">
-                        <Label Text="{Binding Title}" FontSize="18" TextColor="#006064" />
-                        <Label Text="{Binding Model}"/>
-                        <Label Text="{Binding Price, StringFormat='{0:C}'}"/>
-                        <Label Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy}'}"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Picker x:Name="CarBrandPicker" 
+                    Title="Car brand"
+                    ItemsSource="{Binding CarBrands}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedBrand}"
+                    SelectedIndexChanged="PickerSelectedIndexChanged">
+                <Picker.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                    Command="{Binding UpdateMembersListCommand}"/>
+                </Picker.Behaviors>
+            </Picker>
 
-    
+            <Editor IsReadOnly="True"
+                    Text="{Binding SelectedBrandInfo}"
+                    HeightRequest="70">
+            </Editor>
+
+            <CollectionView ItemsSource="{Binding Announcements}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="persistence:AnnouncementDto">
+                        <Border Stroke="#E0E0E0"
+                                StrokeThickness="1"
+                                Padding="10"
+                                Margin="10,5"
+                                BackgroundColor="{Binding Price, Converter={StaticResource PriceToColorConverter}}">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Title}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold"
+                                       TextColor="#006064" />
+                                <Label Text="{Binding Model}"
+                                       FontSize="12"
+                                       TextColor="Gray"/>
+                                <Label Text="{Binding Price, StringFormat='${0:N0}'}"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"/>
+                                <Label Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy}'}"
+                                       FontSize="10"
+                                       TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

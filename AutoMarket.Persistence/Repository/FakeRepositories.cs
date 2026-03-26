@@ -108,8 +108,101 @@ namespace AutoMarket.Persistence.Repository
             {
                 Id = _nextId++
             };
+            var ann5 = new CarAnnouncement("BMW X6 M50i", "X6", 110000m, "Спортивный кроссовер, полный привод, 530 л.с.", 2022, 1)
+            {
+                Id = _nextId++
+            };
+            var ann6 = new CarAnnouncement("BMW 740Li", "7 Series", 120000m, "Бизнес-класс, кожаный салон, массаж сидений", 2023, 1)
+            {
+                Id = _nextId++
+            };
+            var ann7 = new CarAnnouncement("BMW 530e", "5 Series", 65000m, "Гибрид, экономичный расход, M-пакет", 2022, 1)
+            {
+                Id = _nextId++
+            };
+            var ann8 = new CarAnnouncement("BMW Z4 Roadster", "Z4", 55000m, "Кабриолет, задний привод, 2.0 литра", 2021, 1)
+            {
+                Id = _nextId++
+            };
+            var ann9 = new CarAnnouncement("BMW X1 xDrive25e", "X1", 48000m, "Компактный кроссовер, подключаемый гибрид", 2023, 1)
+            {
+                Id = _nextId++
+            };
+            var ann10 = new CarAnnouncement("Toyota Land Cruiser 300", "Land Cruiser", 130000m, "Внедорожник премиум-класса, 3.5 л V6", 2022, 2)
+            {
+                Id = _nextId++
+            };
+            var ann11 = new CarAnnouncement("Toyota RAV4 Adventure", "RAV4", 42000m, "Полный привод, внедорожный пакет, панорамная крыша", 2023, 2)
+            {
+                Id = _nextId++
+            };
+            var ann12 = new CarAnnouncement("Toyota Highlander Platinum", "Highlander", 55000m, "7 мест, кожа, подогрев всех сидений", 2022, 2)
+            {
+                Id = _nextId++
+            };
+            var ann13 = new CarAnnouncement("Toyota GR Supra", "Supra", 62000m, "Спорткар, 3.0 литра, 340 л.с.", 2023, 2)
+            {
+                Id = _nextId++
+            };
+            var ann14 = new CarAnnouncement("Toyota Corolla Cross", "Corolla Cross", 28000m, "Компактный кроссовер, экономичный расход", 2023, 2)
+            {
+                Id = _nextId++
+            };
+            var ann15 = new CarAnnouncement("Tesla Model Y Long Range", "Model Y", 67000m, "Электрокроссовер, запас хода 533 км, полный привод", 2023, 3)
+            {
+                Id = _nextId++
+            };
+            var ann16 = new CarAnnouncement("Tesla Model S Plaid", "Model S", 135000m, "Спортивный седан, разгон 0-100 за 2.1 сек, 1020 л.с.", 2022, 3)
+            {
+                Id = _nextId++
+            };
+            var ann17 = new CarAnnouncement("Tesla Model X Long Range", "Model X", 115000m, "Электрокроссовер с 'крыльями чайки', 7 мест", 2023, 3)
+            {
+                Id = _nextId++
+            };
+            var ann18 = new CarAnnouncement("Tesla Cybertruck", "Cybertruck", 80000m, "Электропикап, нерабочий прототип", 2024, 3)
+            {
+                Id = _nextId++
+            };
+            var ann19 = new CarAnnouncement("Tesla Model 3 Standard Range", "Model 3", 42000m, "Базовый седан, запас хода 491 км", 2023, 3)
+            {
+                Id = _nextId++
+            };
 
-            _announcements.AddRange(new[] { ann1, ann2, ann3, ann4 });
+            var ann20 = new CarAnnouncement("Audi RS6 Avant", "RS6", 145000m, "Универсал-спорткар, 4.0 V8 Biturbo, 600 л.с.", 2022, 4)
+            {
+                Id = _nextId++
+            };
+            var ann21 = new CarAnnouncement("Audi Q8 55 TFSI", "Q8", 95000m, "Флагманский кроссовер, лазерные фары, 3.0 литра", 2023, 4)
+            {
+                Id = _nextId++
+            };
+            var ann22 = new CarAnnouncement("Audi e-tron GT", "e-tron GT", 110000m, "Электрический спортседан, 476 л.с.", 2023, 4)
+            {
+                Id = _nextId++
+            };
+            var ann23 = new CarAnnouncement("Audi A8 L", "A8", 125000m, "Бизнес-седан, удлиненная версия, подогрев всех сидений", 2022, 4)
+            {
+                Id = _nextId++
+            };
+            var ann24 = new CarAnnouncement("Audi Q5 Sportback", "Q5", 58000m, "Купеобразный кроссовер, 2.0 литра, полный привод", 2023, 4)
+            {
+                Id = _nextId++
+            };
+            _announcements.AddRange(new[]
+            {
+                // BMW (id = 1)
+                ann1, ann2, ann5, ann6, ann7, ann8, ann9,
+    
+                // Toyota (id = 2)
+                ann3, ann10, ann11, ann12, ann13, ann14,
+    
+                // Tesla (id = 3)
+                ann4, ann15, ann16, ann17, ann18, ann19,
+    
+                // Audi (id = 4)
+                ann20, ann21, ann22, ann23, ann24
+            });
         }
 
         public async Task<CarAnnouncement?> GetByIdAsync(int id, CancellationToken ct = default,
