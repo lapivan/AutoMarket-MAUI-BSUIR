@@ -3,8 +3,6 @@ using AutoMarket.Persistence;
 using AutoMarket.Persistence.Data;
 using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace AutoMarket.UI
 {

@@ -8,13 +8,15 @@ namespace AutoMarket.UI
         public static IServiceCollection RegisterPages(this IServiceCollection services)
         {
             services.AddTransient<CarBrands>()
-                    .AddTransient<AnnouncementDetails>();
+                    .AddTransient<AnnouncementDetails>()
+                    .AddTransient<AddCarBrand>();
             return services;
         }
         public static IServiceCollection RegisterViewModels(this IServiceCollection services)
         {
             services.AddTransient<CarBrandsViewModel>()
-                    .AddTransient<AnnouncementDetailsViewModel>();
+                    .AddTransient<AnnouncementDetailsViewModel>()
+                    .AddTransient<AddCarBrandViewModel>();
             return services;
         }
     }

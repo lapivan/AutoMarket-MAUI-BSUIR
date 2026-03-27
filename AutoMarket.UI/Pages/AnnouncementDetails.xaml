@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:AutoMarket.UI.ViewModels"
              x:Class="AutoMarket.UI.Pages.AnnouncementDetails"
-             Title="Детали объявления"
+             Title="AnnoncementDetails"
              BackgroundColor="White"
              x:DataType="viewmodels:AnnouncementDetailsViewModel">
 

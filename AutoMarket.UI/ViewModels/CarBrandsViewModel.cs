@@ -1,3 +1,5 @@
+using AutoMarket.Application.CarAnnouncementUseCases.Commands;
+using AutoMarket.Application.CarBrandUseCases.Commands;
 using AutoMarket.Application.CarBrandUseCases.Queries;
 using AutoMarket.UI.Pages;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -30,7 +32,14 @@ public partial class CarBrandsViewModel : ObservableObject
     [RelayCommand]
     public async Task UpdateMembersList() => await GetAnnouncements();
     [RelayCommand]
-    async void ShowDetails(AnnouncementDto announcement) => await GotoDetailsPage(announcement);
+    public async Task ShowDetails(AnnouncementDto announcement) => await GotoDetailsPage(announcement);
+    [RelayCommand]
+    public async Task RemoveBrand() => await RemoveCurrentBrand();
+    [RelayCommand]
+    private async Task CreateBrand()
+    {
+        await Shell.Current.GoToAsync(nameof(AddCarBrand));
+    }
     private async Task GotoDetailsPage(AnnouncementDto announcement)
     {
         IDictionary<string, object> parameters = new Dictionary<string, object>()
@@ -39,7 +48,17 @@ public partial class CarBrandsViewModel : ObservableObject
         };
         await Shell.Current.GoToAsync(nameof(AnnouncementDetails), parameters);
     }
+    private async Task RemoveCurrentBrand()
+    {
+        await _mediator.Send(new DeleteCarBrandCommand(SelectedBrand.Id));
+        SelectedBrand = null;
 
+        await GetBrands();
+        await MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            Announcements.Clear();
+        });
+    }
     private async Task GetBrands()
     {
         var brands = await _mediator.Send(new GetCarBrandListQuery());

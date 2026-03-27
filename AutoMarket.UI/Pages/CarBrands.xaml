@@ -22,8 +22,26 @@
     </ContentPage.Behaviors>
 
     <ContentPage.MenuBarItems>
-        <MenuBarItem Text="Create Brand">
+        <MenuBarItem Text="Brand">
+            <MenuItem Text="Create Brand"
+                  Command="{Binding CreateBrandCommand}">
+                <MenuItem.IconImageSource>
+                    <FontImageSource FontFamily="MaterialIcons"
+                                 Glyph="add"
+                                 Color="#10B981"/>
+                </MenuItem.IconImageSource>
+            </MenuItem>
+        </MenuBarItem>
 
+        <MenuBarItem Text="Announcement">
+            <MenuItem Text="Create Announcement"
+                  Command="{Binding CreateAnnouncementCommand}">
+                <MenuItem.IconImageSource>
+                    <FontImageSource FontFamily="MaterialIcons"
+                                 Glyph="add"
+                                 Color="#10B981"/>
+                </MenuItem.IconImageSource>
+            </MenuItem>
         </MenuBarItem>
     </ContentPage.MenuBarItems>
 
@@ -63,23 +81,22 @@
                                 TextColor="#3498DB"
                                 FontSize="12"
                                 WidthRequest="75"
-                                HeightRequest="20"
+                                HeightRequest="30"
                                 CornerRadius="6"
                                 BorderWidth="1"
-                                BorderColor="#3498DB"
-
-                                Command="{Binding EditBrandCommand}"/>
+                                BorderColor="#3498DB"/>
 
                     <Button Text="Remove"
-                                BackgroundColor="Transparent"
-                                TextColor="#E74C3C"
-                                FontSize="12"
-                                WidthRequest="75"
-                                HeightRequest="20"
-                                CornerRadius="6"
-                                BorderWidth="1"
-                                BorderColor="#E74C3C"
-                                Command="{Binding RemoveBrandCommand}"/>        
+                            BackgroundColor="Transparent"
+                            TextColor="#E74C3C"
+                            FontSize="12"
+                            WidthRequest="75"
+                            HeightRequest="30" 
+                            CornerRadius="6"
+                            BorderWidth="1"
+                            BorderColor="#E74C3C"
+                            Command="{Binding RemoveBrandCommand}" />
+
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
