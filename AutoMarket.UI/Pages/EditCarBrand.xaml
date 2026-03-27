@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoMarket.UI.Pages.EditCarBrand"
+             xmlns:viewmodels="clr-namespace:AutoMarket.UI.ViewModels"
+             BackgroundColor="White"
+             x:DataType="viewmodels:EditCarBrandViewModel"
+             Title="Edit Brand">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,10"
+                             Spacing="12">
+
+            <Border Stroke="#E0E0E0"
+                    StrokeThickness="1"
+                    BackgroundColor="#FAFAFA"
+                    Padding="15">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Brand Name"
+                           FontSize="13"
+                           TextColor="#424242"/>
+
+                    <Entry Text="{Binding BrandName}"
+                           BackgroundColor="#F5F5F5"
+                           TextColor="Black"
+                           HeightRequest="40" />
+
+                    <Label Text="Country of Origin"
+                           FontSize="13"
+                           TextColor="#424242"/>
+
+                    <Entry Text="{Binding Country}"
+                           BackgroundColor="#F5F5F5"
+                           TextColor="Black"
+                           HeightRequest="40" />
+
+                    <Label Text="Year Founded"
+                           FontSize="13"
+                           TextColor="#424242"/>
+
+                    <Entry Text="{Binding YearFounded}"
+                           Keyboard="Numeric"
+                           BackgroundColor="#F5F5F5"
+                           TextColor="Black"
+                           HeightRequest="40" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <HorizontalStackLayout Spacing="10"
+                                   Margin="0,15,0,0">
+
+                <Button Text="Save"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#E8F5E9"
+                        TextColor="#2E7D32"
+                        FontSize="13"
+                        CornerRadius="6"
+                        Padding="12,6" />
+
+                <Button Text="Cancel"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="#7F8C8D"
+                        FontSize="13" />
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -9,6 +9,7 @@ namespace AutoMarket.UI
             InitializeComponent();
             Routing.RegisterRoute(nameof(AnnouncementDetails), typeof(AnnouncementDetails));
             Routing.RegisterRoute(nameof(AddCarBrand), typeof(AddCarBrand));
+            Routing.RegisterRoute(nameof(EditCarBrand), typeof(EditCarBrand));
         }
     }
 }

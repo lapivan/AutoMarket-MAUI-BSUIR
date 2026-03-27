@@ -21,6 +21,9 @@ public partial class CarBrands : ContentPage
         base.OnAppearing();
 
         if (BindingContext is CarBrandsViewModel vm)
+        { 
             await vm.UpdateGroupListCommand.ExecuteAsync(null);
+            await vm.UpdateMembersListCommand.ExecuteAsync(null);
+        }
     }
 }

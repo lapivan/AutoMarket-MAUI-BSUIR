@@ -40,6 +40,8 @@ public partial class CarBrandsViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync(nameof(AddCarBrand));
     }
+    [RelayCommand]
+    public async Task EditBrand(BrandListDto brand) => await EditCurrentBrand(brand);
     private async Task GotoDetailsPage(AnnouncementDto announcement)
     {
         IDictionary<string, object> parameters = new Dictionary<string, object>()
@@ -47,6 +49,14 @@ public partial class CarBrandsViewModel : ObservableObject
             { "Announcement", announcement }
         };
         await Shell.Current.GoToAsync(nameof(AnnouncementDetails), parameters);
+    }
+    private async Task EditCurrentBrand(BrandListDto brand)
+    {
+        IDictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            { "Brand", brand }
+        };
+        await Shell.Current.GoToAsync(nameof(EditCarBrand), parameters);
     }
     private async Task RemoveCurrentBrand()
     {

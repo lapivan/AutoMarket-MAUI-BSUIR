@@ -95,7 +95,9 @@
                             HeightRequest="30"
                             CornerRadius="6"
                             BorderWidth="1"
-                            BorderColor="#3498DB" />
+                            BorderColor="#3498DB" 
+                            Command="{Binding EditBrandCommand}"
+                            CommandParameter="{Binding SelectedBrand}"/>
 
                     <Button Text="Remove"
                             BackgroundColor="Transparent"
