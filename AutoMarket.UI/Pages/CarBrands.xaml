@@ -47,11 +47,41 @@
 
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="0,0,0,5"/>
 
-            <Label Text="{Binding SelectedBrandInfo}" 
-                   FontSize="14" 
-                   TextColor="#424242"
-                   Padding="5,0"
-                   LineBreakMode="WordWrap"/>
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label Text="{Binding SelectedBrandInfo}" 
+                       FontSize="14" 
+                       TextColor="#424242"
+                       Padding="5,0"
+                       LineBreakMode="WordWrap"
+                       VerticalOptions="Center"/>  
+
+                <VerticalStackLayout Spacing="5" 
+                                     VerticalOptions="Center"
+                                     IsVisible="{Binding ButtonsAreVisible}">
+                    <Button Text="Edit" 
+                                BackgroundColor="Transparent"
+                                TextColor="#3498DB"
+                                FontSize="12"
+                                WidthRequest="75"
+                                HeightRequest="20"
+                                CornerRadius="6"
+                                BorderWidth="1"
+                                BorderColor="#3498DB"
+
+                                Command="{Binding EditBrandCommand}"/>
+
+                    <Button Text="Remove"
+                                BackgroundColor="Transparent"
+                                TextColor="#E74C3C"
+                                FontSize="12"
+                                WidthRequest="75"
+                                HeightRequest="20"
+                                CornerRadius="6"
+                                BorderWidth="1"
+                                BorderColor="#E74C3C"
+                                Command="{Binding RemoveBrandCommand}"/>        
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
             <BoxView HeightRequest="1" Color="#F5F5F5" Margin="0,10"/>
 

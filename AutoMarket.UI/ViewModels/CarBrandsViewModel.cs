@@ -13,6 +13,7 @@ public partial class CarBrandsViewModel : ObservableObject
     public ObservableCollection<AnnouncementDto> Announcements { get; set; } = new();
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SelectedBrandInfo))]
+    [NotifyPropertyChangedFor(nameof(ButtonsAreVisible))]
     private BrandListDto _selectedBrand;
     public CarBrandsViewModel(IMediator mediator)
     {
@@ -23,6 +24,7 @@ public partial class CarBrandsViewModel : ObservableObject
         : $"Brand: {SelectedBrand.Name ?? "Unknown"}\n" +
           $"Country: {SelectedBrand.CountryOfOrigin ?? "Unknown"}\n" +
           $"Year of foundation: {SelectedBrand.YearFounded}";
+    public bool ButtonsAreVisible => SelectedBrand != null;
     [RelayCommand]
     public async Task UpdateGroupList() => await GetBrands();
     [RelayCommand]
