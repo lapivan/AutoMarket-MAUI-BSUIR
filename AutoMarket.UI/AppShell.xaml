@@ -8,12 +8,6 @@
     xmlns:pages="clr-namespace:AutoMarket.UI.Pages">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    <ShellContent 
-        Title="Car Brands" 
         ContentTemplate="{DataTemplate pages:CarBrands}" 
         Route="Cources" />
-    
 </Shell>
