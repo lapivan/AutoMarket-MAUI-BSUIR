@@ -7,48 +7,53 @@
              x:Name="CarBrandsPage"
              BackgroundColor="White"
              xmlns:models="clr-namespace:AutoMarket.UI.ViewModels"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="models:CarBrandsViewModel">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:PriceToColorConverter x:Key="PriceToColorConverter"/>
+            <converters:PriceToColorConverter x:Key="PriceToColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded" 
-                                        Command="{Binding UpdateGroupListCommand}"/>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                       Command="{Binding UpdateGroupListCommand}" />
     </ContentPage.Behaviors>
 
-    <ContentPage.MenuBarItems>
-        <MenuBarItem Text="Brand">
-            <MenuItem Text="Create Brand"
-                  Command="{Binding CreateBrandCommand}">
-                <MenuItem.IconImageSource>
-                    <FontImageSource FontFamily="MaterialIcons"
-                                 Glyph="add"
-                                 Color="#10B981"/>
-                </MenuItem.IconImageSource>
-            </MenuItem>
-        </MenuBarItem>
-
-        <MenuBarItem Text="Announcement">
-            <MenuItem Text="Create Announcement"
-                  Command="{Binding CreateAnnouncementCommand}">
-                <MenuItem.IconImageSource>
-                    <FontImageSource FontFamily="MaterialIcons"
-                                 Glyph="add"
-                                 Color="#10B981"/>
-                </MenuItem.IconImageSource>
-            </MenuItem>
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>
-
     <ScrollView>
-        <VerticalStackLayout Padding="20,10" Spacing="10">
+        <VerticalStackLayout Padding="20,10"
+                             Spacing="10">
 
-            <Picker x:Name="CarBrandPicker" 
+            <Border Stroke="#E0E0E0"
+                    StrokeThickness="1"
+                    BackgroundColor="#FAFAFA"
+                    Padding="10"
+                    Margin="0,0,0,10">
+
+                <HorizontalStackLayout Spacing="8"
+                                       HorizontalOptions="Start">
+
+                    <Button Text="Create Brand"
+                            Command="{Binding CreateBrandCommand}"
+                            BackgroundColor="#E8F5E9"
+                            TextColor="#2E7D32"
+                            FontSize="13"
+                            CornerRadius="6"
+                            Padding="10,4" />
+
+                    <Button Text="Create Announcement"
+                            Command="{Binding CreateAnnouncementCommand}"
+                            BackgroundColor="#E8F5E9"
+                            TextColor="#2E7D32"
+                            FontSize="13"
+                            CornerRadius="6"
+                            Padding="10,4" />
+
+                </HorizontalStackLayout>
+            </Border>
+
+            <Picker x:Name="CarBrandPicker"
                     Title="Choose brand"
                     TextColor="Black"
                     FontSize="18"
@@ -57,41 +62,47 @@
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedBrand}"
                     BackgroundColor="#EDEDED">
+
                 <Picker.Behaviors>
                     <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
-                                                    Command="{Binding UpdateMembersListCommand}"/>
+                                                   Command="{Binding UpdateMembersListCommand}" />
                 </Picker.Behaviors>
             </Picker>
 
-            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="0,0,0,5"/>
+            <BoxView HeightRequest="1"
+                     Color="#EEEEEE"
+                     Margin="0,0,0,5" />
 
-            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                <Label Text="{Binding SelectedBrandInfo}" 
-                       FontSize="14" 
+            <HorizontalStackLayout Spacing="10"
+                                   VerticalOptions="Center">
+
+                <Label Text="{Binding SelectedBrandInfo}"
+                       FontSize="14"
                        TextColor="#424242"
                        Padding="5,0"
                        LineBreakMode="WordWrap"
-                       VerticalOptions="Center"/>  
+                       VerticalOptions="Center" />
 
-                <VerticalStackLayout Spacing="5" 
+                <VerticalStackLayout Spacing="5"
                                      VerticalOptions="Center"
                                      IsVisible="{Binding ButtonsAreVisible}">
-                    <Button Text="Edit" 
-                                BackgroundColor="Transparent"
-                                TextColor="#3498DB"
-                                FontSize="12"
-                                WidthRequest="75"
-                                HeightRequest="30"
-                                CornerRadius="6"
-                                BorderWidth="1"
-                                BorderColor="#3498DB"/>
+
+                    <Button Text="Edit"
+                            BackgroundColor="Transparent"
+                            TextColor="#3498DB"
+                            FontSize="12"
+                            WidthRequest="75"
+                            HeightRequest="30"
+                            CornerRadius="6"
+                            BorderWidth="1"
+                            BorderColor="#3498DB" />
 
                     <Button Text="Remove"
                             BackgroundColor="Transparent"
                             TextColor="#E74C3C"
                             FontSize="12"
                             WidthRequest="75"
-                            HeightRequest="30" 
+                            HeightRequest="30"
                             CornerRadius="6"
                             BorderWidth="1"
                             BorderColor="#E74C3C"
@@ -100,42 +111,55 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-            <BoxView HeightRequest="1" Color="#F5F5F5" Margin="0,10"/>
+            <BoxView HeightRequest="1"
+                     Color="#F5F5F5"
+                     Margin="0,10" />
 
             <CollectionView ItemsSource="{Binding Announcements}">
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="persistence:AnnouncementDto">
+
                         <Border Stroke="#E0E0E0"
                                 StrokeThickness="1"
                                 Padding="10"
                                 Margin="0,5"
                                 BackgroundColor="{Binding Price, Converter={StaticResource PriceToColorConverter}}">
+
                             <VerticalStackLayout Spacing="5">
+
                                 <VerticalStackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference CarBrandsPage}, 
-                                        Path=BindingContext.ShowDetailsCommand}" 
-                                        CommandParameter="{Binding}"/>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference CarBrandsPage}, Path=BindingContext.ShowDetailsCommand}"
+                                                          CommandParameter="{Binding}" />
                                 </VerticalStackLayout.GestureRecognizers>
-                                <Label Text="{Binding Title}" 
-                                       FontSize="16" 
+
+                                <Label Text="{Binding Title}"
+                                       FontSize="16"
                                        FontAttributes="Bold"
                                        TextColor="#006064" />
+
                                 <Label Text="{Binding Model}"
                                        FontSize="12"
-                                       TextColor="Gray"/>
+                                       TextColor="Gray" />
+
                                 <Label Text="{Binding Price, StringFormat='${0:N0}'}"
                                        FontSize="14"
                                        FontAttributes="Bold"
-                                       TextColor="Black"/>
+                                       TextColor="Black" />
+
                                 <Label Text="{Binding CreatedAt, StringFormat='{0:dd.MM.yyyy}'}"
                                        FontSize="10"
-                                       TextColor="Gray"/>
+                                       TextColor="Gray" />
+
                             </VerticalStackLayout>
                         </Border>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+
             </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
