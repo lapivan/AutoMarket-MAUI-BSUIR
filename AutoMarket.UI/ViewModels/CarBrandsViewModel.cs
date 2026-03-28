@@ -27,21 +27,22 @@ public partial class CarBrandsViewModel : ObservableObject
           $"Country: {SelectedBrand.CountryOfOrigin ?? "Unknown"}\n" +
           $"Year of foundation: {SelectedBrand.YearFounded}";
     public bool ButtonsAreVisible => SelectedBrand != null;
+
     [RelayCommand]
-    public async Task UpdateGroupList() => await GetBrands();
+    private async Task UpdateGroupList() => await GetBrands();
     [RelayCommand]
-    public async Task UpdateMembersList() => await GetAnnouncements();
+    private async Task UpdateMembersList() => await GetAnnouncements();
     [RelayCommand]
-    public async Task ShowDetails(AnnouncementDto announcement) => await GotoDetailsPage(announcement);
+    private async Task ShowDetails(AnnouncementDto announcement) => await GotoDetailsPage(announcement);
     [RelayCommand]
-    public async Task RemoveBrand() => await RemoveCurrentBrand();
+    private async Task RemoveBrand() => await RemoveCurrentBrand();
     [RelayCommand]
-    private async Task CreateBrand()
-    {
-        await Shell.Current.GoToAsync(nameof(AddCarBrand));
-    }
+    private async Task CreateBrand() => await Shell.Current.GoToAsync(nameof(AddCarBrand));
     [RelayCommand]
-    public async Task EditBrand(BrandListDto brand) => await EditCurrentBrand(brand);
+    private async Task EditBrand(BrandListDto brand) => await EditCurrentBrand(brand);
+    [RelayCommand]
+    private async Task AddAnnouncementToCurrentBrand() => await CreateAnnouncement();
+
     private async Task GotoDetailsPage(AnnouncementDto announcement)
     {
         IDictionary<string, object> parameters = new Dictionary<string, object>()
@@ -57,6 +58,20 @@ public partial class CarBrandsViewModel : ObservableObject
             { "Brand", brand }
         };
         await Shell.Current.GoToAsync(nameof(EditCarBrand), parameters);
+    }
+    private async Task CreateAnnouncement()
+    {
+        if (SelectedBrand == null)
+        {
+            await Shell.Current.DisplayAlert("Error", "Please select a car brand first", "OK");
+            return;
+        }
+
+        IDictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            { "Id", SelectedBrand.Id }
+        };
+        await Shell.Current.GoToAsync(nameof(AddAnnouncement), parameters);
     }
     private async Task RemoveCurrentBrand()
     {

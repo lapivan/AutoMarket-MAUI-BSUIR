@@ -10,7 +10,8 @@ namespace AutoMarket.UI
             services.AddTransient<CarBrands>()
                     .AddTransient<AnnouncementDetails>()
                     .AddTransient<AddCarBrand>()
-                    .AddTransient<EditCarBrand>();
+                    .AddTransient<EditCarBrand>()
+                    .AddTransient<AddAnnouncement>();
             return services;
         }
         public static IServiceCollection RegisterViewModels(this IServiceCollection services)
@@ -18,7 +19,8 @@ namespace AutoMarket.UI
             services.AddTransient<CarBrandsViewModel>()
                     .AddTransient<AnnouncementDetailsViewModel>()
                     .AddTransient<AddCarBrandViewModel>()
-                    .AddTransient<EditCarBrandViewModel>();
+                    .AddTransient<EditCarBrandViewModel>()
+                    .AddTransient<AddAnnouncementViewModel>();
             return services;
         }
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AutoMarket.UI.Pages.EditCarBrand"
+             x:Class="AutoMarket.UI.Pages.AddAnnouncement"
              xmlns:viewmodels="clr-namespace:AutoMarket.UI.ViewModels"
              BackgroundColor="White"
-             x:DataType="viewmodels:EditCarBrandViewModel">
+             x:DataType="viewmodels:AddAnnouncementViewModel">
 
     <ScrollView>
         <VerticalStackLayout Padding="20,10"
@@ -17,33 +17,53 @@
 
                 <VerticalStackLayout Spacing="12">
 
-                    <Label Text="Brand Name"
+                    <Label Text="Title"
                            FontSize="13"
                            TextColor="#424242"/>
 
-                    <Entry Text="{Binding BrandName}"
+                    <Entry Text="{Binding Title}"
                            BackgroundColor="#F5F5F5"
                            TextColor="Black"
-                           HeightRequest="40" />
+                           HeightRequest="40"/>
 
-                    <Label Text="Country of Origin"
+                    <Label Text="Model"
                            FontSize="13"
                            TextColor="#424242"/>
 
-                    <Entry Text="{Binding Country}"
+                    <Entry Text="{Binding Model}"
                            BackgroundColor="#F5F5F5"
                            TextColor="Black"
-                           HeightRequest="40" />
+                           HeightRequest="40"/>
 
-                    <Label Text="Year Founded"
+                    <Label Text="Price ($)"
                            FontSize="13"
                            TextColor="#424242"/>
 
-                    <Entry Text="{Binding YearFounded}"
+                    <Entry Text="{Binding Price}"
                            Keyboard="Numeric"
                            BackgroundColor="#F5F5F5"
                            TextColor="Black"
-                           HeightRequest="40" />
+                           HeightRequest="40"/>
+                    
+                    <Label Text="Manufacture Year"
+                           FontSize="13"
+                           TextColor="#424242"/>
+
+                    <Entry Text="{Binding ManufactureYear}"
+                           Keyboard="Numeric"
+                           BackgroundColor="#F5F5F5"
+                           TextColor="Black"
+                           HeightRequest="40"/>
+                    
+                    <Label Text="Description"
+                           FontSize="13"
+                           TextColor="#424242"/>
+
+                    <Editor Text="{Binding Description}"
+                            BackgroundColor="#F5F5F5"
+                            TextColor="Black"
+                            HeightRequest="100"
+                            AutoSize="TextChanges"/>
 
                 </VerticalStackLayout>
             </Border>

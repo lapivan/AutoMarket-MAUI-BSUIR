@@ -43,7 +43,7 @@
                             Padding="10,4" />
 
                     <Button Text="Create Announcement"
-                            Command="{Binding CreateAnnouncementCommand}"
+                            Command="{Binding AddAnnouncementToCurrentBrandCommand}"
                             BackgroundColor="#E8F5E9"
                             TextColor="#2E7D32"
                             FontSize="13"
