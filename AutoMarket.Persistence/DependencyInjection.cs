@@ -9,19 +9,22 @@ namespace AutoMarket.Persistence
     {
         public static IServiceCollection AddFakePersistence(this IServiceCollection services)
         {
-            services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
+            services.AddScoped<IUnitOfWork, FakeUnitOfWork>();
             return services;
         }
-
 
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
-            services.AddSingleton<IUnitOfWork, EfUnitOfWork>();
+            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             return services;
         }
+
         public static IServiceCollection AddPersistence(this IServiceCollection services, DbContextOptions options)
         {
-            services.AddPersistence().AddSingleton<AppDbContext>(new AppDbContext((DbContextOptions<AppDbContext>)options));
+            services.AddPersistence();
+            services.AddScoped<AppDbContext>(provider =>
+                new AppDbContext((DbContextOptions<AppDbContext>)options));
+
             return services;
         }
     }

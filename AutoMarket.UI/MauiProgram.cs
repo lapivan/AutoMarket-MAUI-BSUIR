@@ -16,9 +16,6 @@ namespace AutoMarket.UI
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "automarket.db");
             string connectionString = $"Data Source={dbPath}";
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connectionString));
-
             builder.Services.AddApplication();
             builder.Services.AddPersistence(new DbContextOptionsBuilder<AppDbContext>().UseSqlite(connectionString).Options);
             builder.Services.RegisterPages();

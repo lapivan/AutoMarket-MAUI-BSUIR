@@ -23,7 +23,11 @@ public partial class CarBrands : ContentPage
         if (BindingContext is CarBrandsViewModel vm)
         { 
             await vm.UpdateGroupListCommand.ExecuteAsync(null);
-            if (vm.SelectedBrand == null)
+            if (vm.SelectedBrand != null)
+            {
+                await vm.UpdateMembersListCommand.ExecuteAsync(null);
+            }
+            else
             {
                 vm.Announcements.Clear();
             }
