@@ -49,7 +49,11 @@ namespace AutoMarket.Domain.Entities
             Model = model;
             UpdatedAt = DateTime.UtcNow;
         }
-
+        public void ChangeCarBrandId(int id)
+        {
+            CarBrandId = id;
+            UpdatedAt = DateTime.UtcNow;
+        }
         public void ChangePrice(decimal price)
         {
             if (price <= 0) throw new ArgumentException("Price must be positive", nameof(price));

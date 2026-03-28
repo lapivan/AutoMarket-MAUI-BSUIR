@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoMarket.UI.Pages.EditAnnouncement"
+             xmlns:viewmodels="clr-namespace:AutoMarket.UI.ViewModels"
+             x:DataType="viewmodels:EditAnnouncementViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,10" Spacing="12">
+            <Border Stroke="#E0E0E0" Padding="15" BackgroundColor="#FAFAFA">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Car Brand (Group)" FontSize="13" TextColor="#424242"/>
+                    <Picker ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding Brands}"
+                            SelectedItem="{Binding SelectedBrand}"
+                            BackgroundColor="#F5F5F5" TextColor="Black" />
+
+                    <Label Text="Title" FontSize="13" TextColor="#424242"/>
+                    <Entry Text="{Binding Title}" BackgroundColor="#F5F5F5" TextColor="Black"/>
+
+                    <Label Text="Model" FontSize="13" TextColor="#424242"/>
+                    <Entry Text="{Binding Model}" BackgroundColor="#F5F5F5" TextColor="Black"/>
+
+                    <Label Text="Price ($)" FontSize="13" TextColor="#424242"/>
+                    <Entry Text="{Binding Price}" Keyboard="Numeric" BackgroundColor="#F5F5F5" TextColor="Black"/>
+
+                    <Label Text="Manufacture Year" FontSize="13" TextColor="#424242"/>
+                    <Entry Text="{Binding ManufactureYear}" Keyboard="Numeric" BackgroundColor="#F5F5F5" TextColor="Black"/>
+
+                    <Label Text="Description" FontSize="13" TextColor="#424242"/>
+                    <Editor Text="{Binding Description}" HeightRequest="100" BackgroundColor="#F5F5F5" TextColor="Black"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <HorizontalStackLayout Spacing="10" Margin="0,15,0,0">
+                <Button Text="Update" Command="{Binding SaveCommand}" BackgroundColor="#E8F5E9" TextColor="#2E7D32" />
+                <Button Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="Transparent" TextColor="#7F8C8D" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

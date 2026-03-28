@@ -22,4 +22,9 @@ public partial class AnnouncementDetails : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.RefreshCommand.ExecuteAsync(null);
+    }
 }

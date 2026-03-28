@@ -4,14 +4,24 @@
              xmlns:viewmodels="clr-namespace:AutoMarket.UI.ViewModels"
              x:Class="AutoMarket.UI.Pages.AnnouncementDetails"
              BackgroundColor="White"
-             x:DataType="viewmodels:AnnouncementDetailsViewModel">
+             x:DataType="viewmodels:AnnouncementDetailsViewModel"
+             xmlns:converters="clr-namespace:AutoMarket.UI.ValueConverters">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit"
+                     Command="{Binding EditAnnouncementCommand}"
+                     Order="Primary"
+                     Priority="0" />
+
         <ToolbarItem Text="Remove"
                      Command="{Binding RemoveAnnouncementCommand}"
                      Order="Primary"
-                     Priority="0" />
+                     Priority="1" />
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <converters:IdToImageConverter x:Key="IdToImageConverter" />
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
@@ -36,7 +46,24 @@
 
                     <BoxView HeightRequest="1" Color="#EEEEEE" Margin="0,5"/>
 
-                    <HorizontalStackLayout Spacing="5">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Image Source="{Binding Announcement.Id, Converter={StaticResource IdToImageConverter}}" 
+                               HeightRequest="300" 
+                               WidthRequest="300" 
+                               Aspect="AspectFill" />
+
+                        <Button Text="Change Photo"
+                                Command="{Binding ChangeImageCommand}"
+                                BackgroundColor="#E3F2FD"
+                                TextColor="#1976D2"
+                                FontSize="12"
+                                Padding="15,0"
+                                HeightRequest="35"
+                                CornerRadius="6"
+                                HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
                         <Label Text="Модель:" FontAttributes="Bold" TextColor="#757575"/>
                         <Label Text="{Binding Announcement.Model}" TextColor="#424242"/>
                     </HorizontalStackLayout>

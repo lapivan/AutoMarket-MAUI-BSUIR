@@ -9,7 +9,8 @@ namespace AutoMarket.Application.CarAnnouncementUseCases.Commands
         decimal Price,
         string Description,
         int ManufactureYear,
-        AnnouncementStatus Status) : IRequest<bool>;
+        AnnouncementStatus Status,
+        int CarBrandId) : IRequest<bool>;
 
     public class UpdateCarAnnouncementHandler : IRequestHandler<UpdateCarAnnouncementCommand, bool>
     {
@@ -26,6 +27,7 @@ namespace AutoMarket.Application.CarAnnouncementUseCases.Commands
             entity.ChangePrice(request.Price);
             entity.ChangeDescription(request.Description);
             entity.ChangeManufactureYear(request.ManufactureYear);
+            entity.ChangeCarBrandId(request.CarBrandId);
 
             switch (request.Status)
             {
